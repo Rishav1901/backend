@@ -1,0 +1,78 @@
+server:
+ port: 9003
+spring:
+ application:
+  name: Gateway 
+ codec:
+  max-in-memory-size: 50MB 
+ cloud:
+  consul:
+   host: localhost
+   discovery:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+    register-health-check: false
+  gateway:
+   
+   globalcors:
+    cors-configurations:
+     '[/**]':
+      allowedOrigins:
+       - "http://localhost:3000"
+      allowedMethods:
+       - GET
+       - POST
+       - PUT
+       - PATCH
+       - DELETE
+       - OPTIONS
+      allowedHeaders: "*"
+      allowCredentials: true
+   discovery:
+    locator:
+     enabled: true
+   routes:
+    - id: AuthenticationMS
+      uri: lb://AuthenticationMS 
+      predicates:
+       - Path=/api/auth/profile-picture
+       - Method=POST
+      filters:
+       - AuthenticationFilter
+    - id: AuthenticationMS2
+      uri: lb://AuthenticationMS 
+      predicates:
+       - Path=/api/auth/** 
+    - id: PostManagementMS_users
+      uri: lb://PostManagementMS 
+      predicates:
+        - Path=/api/users/posts/**,/api/users/{userId:[0-9]+},/api/users/{postId:[0-9]+}/likes,/api/users/{postId:[0-9]+}/comment/**,/api/users/{postId:[0-9]+}/savepost,/api/users/{postId:[0-9]+}/viewpost,/api/users/{postId:[0-9]+}/sharepost/**
+      filters:
+       - AuthenticationFilter
+    - id: AuthenticationMS_users
+      uri: lb://AuthenticationMS
+      predicates:
+       - Path=/api/users/**
+      filters:
+       - AuthenticationFilter
+    - id: PostManagementMS
+      uri: lb://PostManagementMS 
+      predicates:
+       - Path=/api/posts/**,/api/analytics/**,/api/search/hashtag/**,/api/search/hashtag
+      filters:
+       - AuthenticationFilter
+    - id: FollowMS
+      uri: lb://FollowMS 
+      predicates:
+       - Path=/api/follows/**,/api/notifications/**,/api/search/history/**,/api/search/history
+      filters:
+       - AuthenticationFilter
+    - id: TrendingPostsMS
+      uri: lb://TrendingPostsMS
+      predicates:
+       - Path=/api/trending/**
+      filters:
+       - AuthenticationFilter
+
+app:
+ jwtSecret: hihkld@yfgkhrHJfjhyf776986glfyubukhumyfkugvjmhfkmhf

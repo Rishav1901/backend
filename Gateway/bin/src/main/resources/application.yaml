@@ -1,0 +1,24 @@
+server:
+ port: 9100
+spring:
+ application:
+  name: Gateway 
+ cloud:
+  consul:
+   discovery:
+    hostname: localhost
+  gateway:
+   discovery:
+    locator:
+      hostname: host.docker.internal
+#   routes:
+#    - id: projectms
+#      uri: lb://ProjectMS 
+#      predicates:
+#       - Path=/projectms/** 
+#    - id: mentorms
+#      uri: lb://MentorMS
+#      predicates:
+#       - Path=/mentorms/** 
+#       - After=2024-11-20 # time syntax
+#       - PrefixPath=/api

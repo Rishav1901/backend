@@ -1,0 +1,322 @@
+DROP SCHEMA IF EXISTS  instagram_auth_db;
+CREATE DATABASE IF NOT EXISTS instagram_auth_db;
+USE instagram_auth_db;
+
+CREATE TABLE users (
+    user_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    profile_picture MEDIUMBLOB,
+    bio VARCHAR(255),
+    created_at DATETIME(6),
+    updated_at DATETIME(6)
+    
+);
+
+CREATE TABLE refresh_tokens (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    token VARCHAR(255) NOT NULL UNIQUE,
+    expiry_date DATETIME(6) NOT NULL,
+    user_id BIGINT NOT NULL UNIQUE,
+    CONSTRAINT fk_refresh_token_user 
+        FOREIGN KEY (user_id) 
+        REFERENCES users(user_id) 
+        ON DELETE CASCADE
+);
+
+CREATE TABLE password_reset_tokens (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    token VARCHAR(255) NOT NULL UNIQUE,
+    expiry_date DATETIME(6) NOT NULL,
+    user_id BIGINT NOT NULL,
+    created_at DATETIME(6),
+    CONSTRAINT fk_password_reset_user
+        FOREIGN KEY (user_id) 
+        REFERENCES users(user_id) 
+        ON DELETE CASCADE
+);
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+DROP SCHEMA IF EXISTS  follow_db;
+
+CREATE DATABASE IF NOT EXISTS follow_db;
+
+CREATE TABLE follows (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    follower_id BIGINT NOT NULL,
+    following_id BIGINT NOT NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    
+    UNIQUE KEY uk_follower_following (follower_id, following_id),
+    INDEX idx_follower (follower_id),
+    INDEX idx_following (following_id)
+);
+
+CREATE TABLE notifications (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    sender_id BIGINT NOT NULL,
+    receiver_id BIGINT NOT NULL,
+    message VARCHAR(500) NOT NULL,
+    type VARCHAR(50) NOT NULL,
+    is_read BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    
+    INDEX idx_receiver (receiver_id),
+    INDEX idx_sender (sender_id)
+);
+
+CREATE TABLE search_history (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT NOT NULL,
+    searched_user_id BIGINT,
+    searched_keyword VARCHAR(100) NOT NULL,
+    searched_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    
+    INDEX idx_search_user (user_id)
+);
+
+--------------------------------------------------------------------------------------------------------------
+
+DROP SCHEMA IF EXISTS  instagram_post_db;
+CREATE DATABASE IF NOT EXISTS instagram_post_db;
+
+USE instagram_post_db;
+
+CREATE TABLE posts (
+
+post_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+user_id BIGINT NOT NULL,
+
+caption VARCHAR(2000),
+
+media LONGBLOB,
+
+media_type ENUM(
+'IMAGE',
+'VIDEO'
+) NOT NULL,
+ 
+visibility ENUM(
+'PUBLIC',
+'FOLLOWERS',
+'PRIVATE'
+) DEFAULT 'PUBLIC',
+
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE post_media (
+	media_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	
+	post_id BIGINT NOT NULL,
+	
+	media LONGBLOB NOT NULL,
+	
+	media_type ENUM(
+	'IMAGE',
+	'VIDEO'
+	) NOT NULL,
+ 	
+ 	media_order INT DEFAULT 0,
+ 	
+	CONSTRAINT fk_post_media_post
+	FOREIGN KEY (post_id)
+	REFERENCES posts(post_id)
+	ON DELETE CASCADE
+);
+
+CREATE TABLE comments (
+
+comment_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+post_id BIGINT NOT NULL,
+
+user_id BIGINT NOT NULL,
+
+parent_comment_id BIGINT NULL,
+
+comment VARCHAR(1000) NOT NULL,
+
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+ON UPDATE CURRENT_TIMESTAMP,
+
+CONSTRAINT fk_comment_post
+FOREIGN KEY (post_id)
+REFERENCES posts(post_id)
+ON DELETE CASCADE,
+
+CONSTRAINT fk_parent_comment
+FOREIGN KEY (parent_comment_id)
+REFERENCES comments(comment_id)
+ON DELETE CASCADE
+);
+
+CREATE TABLE likes (
+
+like_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+post_id BIGINT NOT NULL,
+
+user_id BIGINT NOT NULL,
+
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+CONSTRAINT uk_post_like
+UNIQUE(post_id, user_id),
+
+CONSTRAINT fk_like_post
+FOREIGN KEY (post_id)
+REFERENCES posts(post_id)
+ON DELETE CASCADE
+);
+
+CREATE TABLE saved_posts (
+
+saved_post_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+post_id BIGINT NOT NULL,
+
+user_id BIGINT NOT NULL,
+
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+CONSTRAINT uk_saved_post
+UNIQUE(post_id, user_id),
+
+CONSTRAINT fk_saved_post
+FOREIGN KEY (post_id)
+REFERENCES posts(post_id)
+ON DELETE CASCADE
+);
+
+CREATE TABLE hashtags (
+
+hashtag_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+tag VARCHAR(100) NOT NULL UNIQUE,
+
+usage_count BIGINT DEFAULT 0,
+
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE post_hashtags (
+
+post_hashtag_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+post_id BIGINT NOT NULL,
+
+hashtag_id BIGINT NOT NULL,
+
+CONSTRAINT uk_post_hashtag
+UNIQUE(post_id, hashtag_id),
+
+CONSTRAINT fk_post_hashtag_post
+FOREIGN KEY (post_id)
+REFERENCES posts(post_id)
+ON DELETE CASCADE,
+
+CONSTRAINT fk_post_hashtag_hashtag
+FOREIGN KEY (hashtag_id)
+REFERENCES hashtags(hashtag_id)
+ON DELETE CASCADE
+);
+
+CREATE TABLE views (
+
+post_view_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+post_id BIGINT NOT NULL,
+
+user_id BIGINT NULL,
+
+ip_address VARCHAR(100),
+
+viewed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+CONSTRAINT uk_view
+UNIQUE(post_id, user_id),
+
+CONSTRAINT fk_post_view_post
+FOREIGN KEY (post_id)
+REFERENCES posts(post_id)
+ON DELETE CASCADE
+);
+
+CREATE INDEX idx_posts_user
+ON posts(user_id);
+
+CREATE INDEX idx_posts_visibility
+ON posts(visibility);
+
+CREATE INDEX idx_posts_created_at
+ON posts(created_at);
+
+CREATE INDEX idx_comments_post
+ON comments(post_id);
+
+CREATE INDEX idx_comments_user
+ON comments(user_id);
+
+CREATE INDEX idx_likes_post
+ON likes(post_id);
+
+CREATE INDEX idx_likes_user
+ON likes(user_id);
+
+CREATE INDEX idx_saved_posts_user
+ON saved_posts(user_id);
+
+CREATE INDEX idx_hashtags_tag_name
+ON hashtags(tag_name);
+
+CREATE INDEX idx_views_post
+ON views(post_id);
+
+CREATE INDEX idx_views_user
+ON views(user_id);
+-------------------------------------------------------------------------------------------
+
+DROP SCHEMA IF EXISTS  instagram_trending_db;
+
+CREATE DATABASE IF NOT EXISTS instagram_trending_db;
+
+USE instagram_trending_db;
+
+CREATE TABLE trending_posts (
+	trending_post_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	post_id BIGINT NOT NULL,
+	trending_score DOUBLE NOT NULL,
+	total_likes BIGINT DEFAULT 0,
+	total_comments BIGINT DEFAULT 0,
+	total_views BIGINT DEFAULT 0,
+	calculated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	CONSTRAINT uk_trending_post	UNIQUE(post_id)
+);
+
+CREATE TABLE trending_hashtags (
+	trending_hashtag_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	hashtag_id BIGINT NOT NULL,
+	trending_score DOUBLE NOT NULL,
+	usage_count BIGINT DEFAULT 0,
+	calculated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	CONSTRAINT uk_trending_hashtag	UNIQUE(hashtag_id)
+);
+
+CREATE INDEX idx_trending_posts_score
+ON trending_posts(trending_score);
+
+CREATE INDEX idx_trending_hashtags_score
+ON trending_hashtags(trending_score);
+
+

@@ -1,0 +1,42 @@
+server.port: 9004 
+spring: 
+  datasource: 
+    driverClassName: com.mysql.cj.jdbc.Driver 
+    url: jdbc:mysql://localhost/instagram_post_db
+    username: root
+    password: root
+  jpa: 
+    hibernate.ddl-auto: update
+  cloud:
+   consul:
+    host : localhost
+    discovery:
+      prefer-ip-address: true
+      ip-address: 127.0.0.1
+      register-health-check: false
+  application:
+   name : PostManagementMS
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 250MB
+
+SERVICE:
+ POST_NOT_FOUND: "Post Id  not found: "
+ LIKE_NOT_FOUND : "Like Id not found: "
+ LIKE_ALREADY_EXISTS : "Like already exists: "
+ COMMENT_NOT_FOUND : "Comment not found: "
+ POST_HASTTAG_NOT_FOUND: "Post Hashtag Not Found: "
+ SAVED_NOT_FOUND : "Saved Post Not Found: "
+ MEDIA_REQUIRED : "Please upload at least one image or video"
+ INVALID_MEDIA_TYPE : "Only image and video files are allowed"
+ MEDIA_UPLOAD_FAILED : "Media upload failed"
+API:
+ POST_CREATED: "Post created: "
+ POST_LIKED : "Post Liked: " 
+ POST_UNLIKED : "Post Unliked: "
+ POST_COMMENT : "Post Comment: " 
+ POST_HASHTAG : "Post Tag: "
+ POST_SAVEPOST : "Post Saved: "
+ POST_VIEW : "Post View: "
+ POST_DELETED : "Post Deleted: "

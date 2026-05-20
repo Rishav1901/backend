@@ -1,0 +1,75 @@
+{
+
+    "analytics": {
+        "posts": [
+        {
+            "postId": 1,
+            "totalLikes": 520,
+            "totalComments": 130,
+            "totalViews": 5400,
+            "createdAt": "2026-05-18T08:30:00"
+        },
+        {
+            "postId": 2,
+            "totalLikes": 220,
+            "totalComments": 80,
+            "totalViews": 2100,
+            "createdAt": "2026-05-18T10:00:00"
+        },
+        {
+            "postId": 3,
+            "totalLikes": 900,
+            "totalComments": 410,
+            "totalViews": 12000,
+            "createdAt": "2026-05-18T11:15:00"
+        },
+        {
+            "postId": 4,
+            "totalLikes": 75,
+            "totalComments": 20,
+            "totalViews": 600,
+            "createdAt": "2026-05-18T12:00:00"
+        },
+        {
+            "postId": 5,
+            "totalLikes": 1500,
+            "totalComments": 600,
+            "totalViews": 25000,
+            "createdAt": "2026-05-18T12:45:00"
+        }
+        ],
+        "hashtags": [
+        {
+            "hashtagId": 1,
+            "tagName": "travel",
+            "usageCount": 1400,
+            "createdAt": "2026-05-18T08:00:00"
+        },
+        {
+            "hashtagId": 2,
+            "tagName": "food",
+            "usageCount": 950,
+            "createdAt": "2026-05-18T09:00:00"
+        },
+        {
+            "hashtagId": 3,
+            "tagName": "fitness",
+            "usageCount": 720,
+            "createdAt": "2026-05-18T10:30:00"
+        },
+        {
+            "hashtagId": 4,
+            "tagName": "nature",
+            "usageCount": 1800,
+            "createdAt": "2026-05-18T11:45:00"
+        },
+        {
+            "hashtagId": 5,
+            "tagName": "music",
+            "usageCount": 1100,
+            "createdAt": "2026-05-18T12:10:00"
+        }
+        ]
+    }
+      
+}

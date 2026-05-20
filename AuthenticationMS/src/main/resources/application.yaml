@@ -1,0 +1,67 @@
+server:
+ port: 9001
+spring:
+ application:
+  name: AuthenticationMS
+ servlet:
+  multipart:
+   max-file-size: 50MB
+   max-request-size: 250MB
+ mail:
+  host: smtp.gmail.com
+  port: 587
+  username: project1579@gmail.com
+  password: kdqdpvjqavxfiusf
+  properties:
+   mail:
+    smtp:
+     auth: true
+     starttls: 
+      enable: true
+
+ cloud:
+  consul:
+   host: localhost
+   discovery:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+    register-health-check: false
+ datasource:
+  url: jdbc:mysql://localhost:3306/instagram_auth_db
+  username: root
+  password: root
+
+ jpa.show-sql: false
+ jpa: 
+   hibernate.ddl-auto: update
+
+app:
+ jwtSecret: hihkld@yfgkhrHJfjhyf776986glfyubukhumyfkugvjmhfkmhf
+ 
+resilience4j:
+ circuitbreaker:
+  instances:
+   loginCircuit:
+    sliding-window-type: TIME_BASED
+    sliding-window-size: 30
+    minimum-number-of-calls: 3
+    failure-rate-threshold: 100
+    wait-duration-in-open-state: 60s
+    permitted-number-of-calls-in-half-open-state: 1
+      
+ 
+management:
+ health:
+  mail:
+   enabled: false
+#   routes:
+#    - id: projectms
+#      uri: lb://ProjectMS 
+#      predicates:
+#       - Path=/projectms/** 
+#    - id: mentorms
+#      uri: lb://MentorMS
+#      predicates:
+#       - Path=/mentorms/** 
+#       - After=2024-11-20 # time syntax
+#       - PrefixPath=/api

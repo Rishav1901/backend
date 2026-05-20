@@ -1,0 +1,43 @@
+server:
+ port: 9005
+spring:
+ application:
+  name: TrendingPostsMS
+ cloud:
+  consul:
+   host: localhost
+   discovery:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+    register-health-check: false
+ datasource:
+  url: jdbc:mysql://localhost/instagram_trending_db
+  password: root
+  username: root 
+ jpa:
+  hibernate:
+   ddl-auto: update
+  show-sql: true
+  properties:
+   hibernate:
+    format-sql: true
+
+external:
+  post-service:
+    base-url: http://PostManagementMS
+    posts-analytics-path: /api/analytics/posts
+    hashtags-analytics-path: /api/analytics/hashtags
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      postService:
+        register-health-indicator: true
+        sliding-window-size: 10
+        minimum-number-of-calls: 10
+        permitted-number-of-calls-in-half-open-state: 3
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 30s
+        automatic-transition-from-open-to-half-open-enabled: true
+
+

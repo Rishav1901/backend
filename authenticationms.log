@@ -1,0 +1,91 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for com.infy.instagram:AuthenticationMS:jar:0.0.1-SNAPSHOT
+[WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.springframework.boot:spring-boot-starter-mail:jar -> duplicate declaration of version (?) @ line 120, column 16
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ----------------< com.infy.instagram:AuthenticationMS >-----------------
+[INFO] Building AuthenticationMS 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.1.1:run (default-cli) > test-compile @ AuthenticationMS >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ AuthenticationMS ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 4 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ AuthenticationMS ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ AuthenticationMS ---
+[INFO] skip non existing resourceDirectory C:\Users\risha\OneDrive\Desktop\InstaProject\group2-backend\AuthenticationMS\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ AuthenticationMS ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] <<< spring-boot:3.1.1:run (default-cli) < test-compile @ AuthenticationMS <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.1.1:run (default-cli) @ AuthenticationMS ---
+[INFO] Attaching agents: []
+SLF4J: Class path contains multiple SLF4J providers.
+SLF4J: Found provider [ch.qos.logback.classic.spi.LogbackServiceProvider@47d384ee]
+SLF4J: Found provider [org.apache.logging.slf4j.SLF4JServiceProvider@2d6a9952]
+SLF4J: See https://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual provider is of type [ch.qos.logback.classic.spi.LogbackServiceProvider@47d384ee]
+2026-05-20T02:37:46.252+05:30  INFO 23756 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.1.1)
+
+2026-05-20T02:37:49.023+05:30  INFO 23756 --- [  restartedMain] b.c.PropertySourceBootstrapConfiguration : Located property source: [BootstrapPropertySource {name='bootstrapProperties-config/application/'}]
+2026-05-20T02:37:49.045+05:30  INFO 23756 --- [  restartedMain] c.i.i.a.AuthenticationApplication        : No active profile set, falling back to 1 default profile: "default"
+2026-05-20T02:37:54.058+05:30  INFO 23756 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-20T02:37:54.642+05:30  INFO 23756 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 555 ms. Found 3 JPA repository interfaces.
+2026-05-20T02:37:55.950+05:30  INFO 23756 --- [  restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=ce7b7bba-285e-39db-84df-9bf34265a9bf
+2026-05-20T02:37:56.950+05:30  INFO 23756 --- [  restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-05-20T02:37:56.963+05:30  INFO 23756 --- [  restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-05-20T02:37:56.975+05:30  INFO 23756 --- [  restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'reactorDeferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-05-20T02:37:59.039+05:30  INFO 23756 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9001 (http)
+2026-05-20T02:37:59.126+05:30  INFO 23756 --- [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-20T02:37:59.127+05:30  INFO 23756 --- [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.10]
+2026-05-20T02:37:59.631+05:30  INFO 23756 --- [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-05-20T02:37:59.633+05:30  INFO 23756 --- [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 10548 ms
+2026-05-20T02:38:02.536+05:30  INFO 23756 --- [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-20T02:38:02.767+05:30  INFO 23756 --- [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.5.Final
+2026-05-20T02:38:02.775+05:30  INFO 23756 --- [  restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2026-05-20T02:38:03.293+05:30  INFO 23756 --- [  restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2026-05-20T02:38:03.724+05:30  INFO 23756 --- [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-20T02:38:03.762+05:30  INFO 23756 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-20T02:38:04.347+05:30  INFO 23756 --- [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@702f955
+2026-05-20T02:38:04.353+05:30  INFO 23756 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-20T02:38:05.333+05:30  INFO 23756 --- [  restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2026-05-20T02:38:07.633+05:30  INFO 23756 --- [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-05-20T02:38:08.139+05:30  INFO 23756 --- [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-20T02:38:10.695+05:30  WARN 23756 --- [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-20T02:38:12.854+05:30  INFO 23756 --- [  restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2026-05-20T02:38:13.029+05:30  INFO 23756 --- [  restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2e861608, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6f620ca, org.springframework.security.web.context.SecurityContextHolderFilter@3fe6f573, org.springframework.security.web.header.HeaderWriterFilter@9e57d00, org.springframework.security.web.authentication.logout.LogoutFilter@2d202e00, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4f9b05f8, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@60d31815, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2a932196, org.springframework.security.web.session.SessionManagementFilter@7e9ad0b8, org.springframework.security.web.access.ExceptionTranslationFilter@6c97d1e3, org.springframework.security.web.access.intercept.AuthorizationFilter@660d510f]
+2026-05-20T02:38:15.409+05:30  WARN 23756 --- [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:00 min
+[INFO] Finished at: 2026-05-20T02:38:15+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.1.1:run (default-cli) on project AuthenticationMS: Process terminated with exit code: -1 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
