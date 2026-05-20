@@ -55,6 +55,10 @@ spring:
        - Path=/api/users/**
       filters:
        - AuthenticationFilter
+    - id: PostManagementMS_media
+      uri: lb://PostManagementMS
+      predicates:
+       - Path=/api/posts/media/**
     - id: PostManagementMS
       uri: lb://PostManagementMS 
       predicates:

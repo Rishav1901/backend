@@ -7,5 +7,4 @@ public class PostMediaDTO {
 	private Long mediaId;
 	private MediaType mediaType;
 	private Integer mediaOrder;
-	private byte[] media;
 }

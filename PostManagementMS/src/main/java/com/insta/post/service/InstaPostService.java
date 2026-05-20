@@ -28,4 +28,5 @@ public interface InstaPostService {
 	PostResponseDTO getAllPostDetailsById(Long postId, Long currentUserId) throws InstaPostManagementException;
 	UserDTO getUserDTO(Long userId);
 	boolean isFollowingUser(Long currentUserId, Long targetUserId);
+	com.insta.post.entity.PostMedia getPostMedia(Long mediaId) throws InstaPostManagementException;
 }

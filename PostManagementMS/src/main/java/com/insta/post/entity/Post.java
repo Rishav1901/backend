@@ -25,7 +25,7 @@ public class Post {
 	private Long postId;
 	private Long userId;
 	private String caption;
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = jakarta.persistence.FetchType.EAGER)
 	private List<PostMedia> mediaList = new ArrayList<>();
 	private Visibility visibility;
 	private LocalDateTime createdAt;

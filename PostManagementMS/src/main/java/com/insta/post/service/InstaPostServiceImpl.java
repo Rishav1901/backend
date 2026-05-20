@@ -34,6 +34,7 @@ import com.insta.post.repository.LikeRepository;
 import com.insta.post.repository.SavedPostRepository;
 import com.insta.post.repository.ViewRepository;
 import com.insta.post.repository.PostHashtagRepository;
+import com.insta.post.repository.PostMediaRepository;
 
 import com.insta.post.entity.Comment;
 import com.insta.post.entity.Like;
@@ -84,6 +85,9 @@ public class InstaPostServiceImpl implements InstaPostService {
 
 	@Autowired
 	PostHashtagRepository postHashtagRepository;
+
+	@Autowired
+	PostMediaRepository postMediaRepository;
 
 	private final ConcurrentHashMap<Long, UserDTO> userCache = new ConcurrentHashMap<>();
 	private final ExecutorService executorService = Executors.newFixedThreadPool(15);
@@ -512,5 +516,11 @@ public class InstaPostServiceImpl implements InstaPostService {
 		}
 
 		return result;
+	}
+
+	@Override
+	public PostMedia getPostMedia(Long mediaId) throws InstaPostManagementException {
+		return postMediaRepository.findById(mediaId)
+				.orElseThrow(() -> new InstaPostManagementException("SERVICE.MEDIA_NOT_FOUND"));
 	}
 }

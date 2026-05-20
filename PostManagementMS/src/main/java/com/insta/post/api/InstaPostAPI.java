@@ -156,4 +156,17 @@ public class InstaPostAPI {
 		instaPostService.editPost(userId, postId, dto, null);
 		return new ResponseEntity<>("Post updated successfully", HttpStatus.OK);
 	}
+
+	@GetMapping("/media/{mediaId}")
+	public ResponseEntity<byte[]> getMedia(@PathVariable Long mediaId) throws InstaPostManagementException {
+		com.insta.post.entity.PostMedia media = instaPostService.getPostMedia(mediaId);
+		org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
+		if (media.getMediaType() == com.insta.post.dto.MediaType.VIDEO) {
+			headers.setContentType(MediaType.parseMediaType("video/mp4"));
+		} else {
+			headers.setContentType(MediaType.IMAGE_JPEG);
+		}
+		headers.setCacheControl("max-age=31536000"); // Cache for 1 year
+		return new ResponseEntity<>(media.getMedia(), headers, HttpStatus.OK);
+	}
 }

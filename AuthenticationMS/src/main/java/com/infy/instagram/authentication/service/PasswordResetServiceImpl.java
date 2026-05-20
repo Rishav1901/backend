@@ -50,7 +50,12 @@ public class PasswordResetServiceImpl  implements PasswordResetService{
         message.setSubject("Password Reset");
         message.setText("Click the link to reset your password: " + resetLink + "\nThis link expires in 15 minutes.");
 
-        mailSender.send(message);
+        try {
+            mailSender.send(message);
+        } catch (org.springframework.mail.MailException e) {
+            System.err.println("WARNING: Mail server connection failed. Reset link printed to console for development:");
+            System.err.println("PASSWORD RESET LINK: " + resetLink);
+        }
     }
 
     public void resetPassword(String token, String newPassword) {

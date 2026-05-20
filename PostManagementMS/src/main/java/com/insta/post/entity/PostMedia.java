@@ -24,6 +24,7 @@ public class PostMedia {
 	private Long mediaId;
 	@Lob
 	@Column(columnDefinition = "LONGBLOB")
+	@jakarta.persistence.Basic(fetch = jakarta.persistence.FetchType.LAZY)
 	private byte[] media;
 	@Enumerated(EnumType.STRING)
 	private MediaType mediaType;
